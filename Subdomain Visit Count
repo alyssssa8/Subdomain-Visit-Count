@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<string> subdomainVisits(vector<string>& cpdomains) {
+        map<string, int>myMap;
+        vector<string> ans;
+        for(int i = 0; i < cpdomains.size(); i++){
+            int spacePosition = cpdomains[i].find(" ");
+            string newString = cpdomains[i].substr(spacePosition + 1, cpdomains[i].size() - spacePosition - 1);
+            int nums = stoi(cpdomains[i].substr(0,spacePosition));
+           for (int j = 0; j < newString.size();j++){
+               if (newString[j]=='.'){
+                   myMap[newString.substr(j+1, newString.size() - j - 1)]+= nums;
+               }
+               
+           }
+            myMap[newString]+=nums;
+            
+        }
+        
+        for (auto i :myMap){
+            ans.push_back(to_string(i.second)+" " + i.first);
+            
+        }
+        return ans;
+    }
+};
